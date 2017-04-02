@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(MathController.class)
@@ -22,6 +23,7 @@ public class MathControllerTest {
     public void testIndex() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.get("/math");
         this.mockMvc.perform(request)
+                .andExpect(status().isOk())
                 .andExpect(content().string("Welcome to Math!"));
     }
 
@@ -29,6 +31,7 @@ public class MathControllerTest {
     public void testPi() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.get("/math/pi");
         this.mockMvc.perform(request)
+                .andExpect(status().isOk())
                 .andExpect(content().string("3.141592653589793"));
     }
 }
