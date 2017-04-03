@@ -42,4 +42,20 @@ public class MathControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("4 + 6 = 10"));
     }
+
+    @Test
+    public void testCalculateDefault() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?x=30&y=5");
+        this.mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("30 + 5 = 35"));
+    }
+
+    @Test
+    public void testSubtract() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=subtract&x=4&y=6");
+        this.mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 - 6 = -2"));
+    }
 }
