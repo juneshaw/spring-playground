@@ -58,4 +58,12 @@ public class MathControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("4 - 6 = -2"));
     }
+
+    @Test
+    public void testSum() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.post("/math/sum?n=4&n=5&n=6");
+        this.mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 + 5 + 6 = 15"));
+    }
 }
