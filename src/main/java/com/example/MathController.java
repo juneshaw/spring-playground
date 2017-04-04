@@ -3,10 +3,7 @@ package com.example;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 @RestController
@@ -45,16 +42,15 @@ public class MathController {
     {
         List<String> queryParams = new ArrayList<String>();
         List<Integer> queryNums = new ArrayList<Integer>();
-        Integer sumParams;
-        String resultStr;
+        Integer resultNum;
 
         queryParams = queryString.get("n");
         for(String s : queryParams) queryNums.add(Integer.valueOf(s));
-        sumParams = MathService.sum(queryNums);
-        return formatExpression(
+        resultNum = MathService.sum(queryNums);
+        return MathService.formatExpression(
+                "add",
                 queryParams,
-                "+",
-                sumParams.toString());
+                resultNum.toString());
     }
 
     @GetMapping("/calculate")
@@ -64,41 +60,16 @@ public class MathController {
             @RequestParam String y)
     {
 
-        Integer resultInt, xInt, yInt;
-        String operand, resultStr;
-        xInt = Integer.parseInt(x);
-        yInt = Integer.parseInt(y);
+        Integer resultNum, xNum, yNum;
+        xNum = Integer.parseInt(x);
+        yNum = Integer.parseInt(y);
+        List<String> queryParams = Arrays.asList(x, y);
 
-        switch (operation) {
-            case "add":
-                operand = "+";
-                resultInt = xInt + yInt;
-                break;
-            case "subtract":
-                operand = "-";
-                resultInt = xInt - yInt;
-                break;
-            case "multiply":
-                operand = "*";
-                resultInt = xInt * yInt;
-                break;
-            case "divide":
-                operand = "/";
-                resultInt = xInt / yInt;
-                break;
-            default:
-                operand = "_";
-                resultInt = xInt + yInt;
-                break;
-        }
-        resultStr = String.format(
-                "%s %s %s = %s",
-                x,
-                operand,
-                y,
-                resultInt.toString()
-        );
-        return resultStr;
+        resultNum = MathService.calculate(operation, xNum, yNum);
+        return MathService.formatExpression(
+                operation,
+                queryParams,
+                resultNum.toString());
     }
 
 }
