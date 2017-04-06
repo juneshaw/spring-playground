@@ -56,7 +56,7 @@ public class MathServiceTest {
         assertEquals(
                 "2 + 3 + 4 + 5 = 14",
                 MathService.formatExpression(
-                        "+",
+                        "add",
                         operands,
                         "14"));
 

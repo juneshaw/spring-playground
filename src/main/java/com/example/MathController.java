@@ -20,22 +20,6 @@ public class MathController {
         return "3.141592653589793";
     }
 
-    String formatExpression(
-            Collection operands,
-            String operator,
-            String result) {
-
-        String expression;
-        StringBuilder stringBuilder = new StringBuilder();
-        Iterator operandIterator = operands.iterator();
-        stringBuilder.append(operandIterator.next());
-        while (operandIterator.hasNext()) {
-            stringBuilder.append(" " + operator + " " + operandIterator.next());
-        }
-        stringBuilder.append(" = " + result);
-        return stringBuilder.toString();
-    }
-
     @PostMapping("/sum")
     public String sum(
             @RequestParam MultiValueMap<String, String> queryString)

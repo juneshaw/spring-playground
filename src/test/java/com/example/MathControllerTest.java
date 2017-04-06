@@ -60,10 +60,37 @@ public class MathControllerTest {
     }
 
     @Test
+    public void testMultiply() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=multiply&x=4&y=6");
+        this.mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 * 6 = 24"));
+
+    }
+
+    @Test
+    public void testDivide() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=divide&x=15&y=3");
+        this.mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("15 / 3 = 5"));
+    }
+
+    @Test
     public void testSum() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.post("/math/sum?n=4&n=5&n=6");
         this.mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string("4 + 5 + 6 = 15"));
     }
+
+//    @Test
+//    public void testVolume() throws Exception {
+//        RequestBuilder request =
+//                MockMvcRequestBuilders.post(
+//                "/math/volume/3/4/5");
+//        this.mockMvc.perform(request)
+//                .andExpect(status().isOk())
+//                .andExpect(content().string("60"));
+//    }
 }
