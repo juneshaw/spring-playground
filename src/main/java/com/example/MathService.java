@@ -6,15 +6,13 @@ import java.util.*;
 
 @Service
 public class MathService {
-    private static Map<String, String> operators;
-    {
-        operators = new HashMap<String, String>() {{
+    private static Map<String, String> operators =
+        new HashMap<String, String>() {{
             put("add", "+");
             put("subtract", "-");
             put("multiply", "*");
             put("divide", "/");
         }};
-    }
 
     public static Integer sum(Collection<Integer> operands)
     {
@@ -23,32 +21,33 @@ public class MathService {
         return sum;
     }
 
-    public static Integer calculate(
+    public static Integer calculate (
             String operator,
             Integer x,
-            Integer y)
+            Integer y) throws Exception
     {
         Integer result;
 
         switch (operator) {
             case "add":
-                operator = "+";
                 result = x + y;
                 break;
             case "subtract":
-                operator = "-";
                 result = x - y;
                 break;
             case "multiply":
-                operator = "*";
                 result = x * y;
                 break;
             case "divide":
-                operator = "/";
-                result = x / y;
+                try {
+                    result = x/y;
+                }
+                catch(Exception exc) {
+                    result = 0;
+                    exc.printStackTrace();
+                }
                 break;
             default:
-                operator = "+";
                 result = x + y;
                 break;
         }

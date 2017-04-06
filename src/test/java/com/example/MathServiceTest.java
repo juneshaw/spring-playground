@@ -21,7 +21,37 @@ public class MathServiceTest {
     }
 
     @Test
-    public void testFormatExpression() throws Exception {
+    public void testCalculateAdd() throws Exception {
+        assertEquals(Integer.valueOf(6),
+                MathService.calculate("add", 2,4));
+    }
+
+    @Test
+    public void testCalculateSubtract() throws Exception {
+        assertEquals(Integer.valueOf(4),
+                MathService.calculate("subtract", 6, 2));
+    }
+
+
+    @Test
+    public void testCalculateMultiply() throws Exception {
+        assertEquals(Integer.valueOf(100),
+                MathService.calculate("multiply", 10, 10));
+    }
+
+    @Test
+    public void testCalculateDivide() throws Exception {
+        assertEquals(Integer.valueOf(3),
+                MathService.calculate("divide", 9,3));
+    }
+
+    @Test
+    public void testCalculateDivideIllegal() throws Exception {
+        assertEquals(Integer.valueOf(0),
+                MathService.calculate("divide", 10, 0));
+    }
+    @Test
+    public void testFormatExpression() {
         List<String> operands = Arrays.asList("2", "3", "4", "5");
         assertEquals(
                 "2 + 3 + 4 + 5 = 14",

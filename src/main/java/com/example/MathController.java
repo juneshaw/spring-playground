@@ -57,7 +57,7 @@ public class MathController {
     public String getCalculate(
             @RequestParam(required=false, defaultValue="add") String operation,
             @RequestParam String x,
-            @RequestParam String y)
+            @RequestParam String y) throws Exception
     {
 
         Integer resultNum, xNum, yNum;
@@ -65,11 +65,17 @@ public class MathController {
         yNum = Integer.parseInt(y);
         List<String> queryParams = Arrays.asList(x, y);
 
-        resultNum = MathService.calculate(operation, xNum, yNum);
-        return MathService.formatExpression(
-                operation,
-                queryParams,
-                resultNum.toString());
+        try {
+            resultNum = MathService.calculate(operation, xNum, yNum);
+            return MathService.formatExpression(
+                    operation,
+                    queryParams,
+                    resultNum.toString());
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+            return exc.toString();
+        }
     }
 
 }
