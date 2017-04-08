@@ -1,5 +1,6 @@
 package com.example;
 
+import com.jayway.jsonpath.spi.json.GsonJsonProvider;
 import javafx.scene.shape.Circle;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -124,11 +125,12 @@ public class MathControllerTest {
 
     @Test
     public void testAreaCircle() throws Exception {
-//        Object rectangleArea
-        Circle
+        Circle circle = new Circle(5);
+        GsonJsonProvider gson = new GsonJsonProvider();
+        String json = gson.toJson(Circle.class);
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .post("/math/area")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("")
+                .content(json);
     }
 }

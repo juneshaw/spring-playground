@@ -98,4 +98,12 @@ public class MathService {
         for (Integer dimension : dimensions) volume *= dimension;
         return volume;
     }
+
+    public static double circleArea(Integer radius) {
+        return Math.PI * Math.pow(radius, 2);
+    }
+
+    public static double rectangleArea(Integer x, Integer y) {
+        return x * y;
+    }
 }

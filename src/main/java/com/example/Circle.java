@@ -1,11 +1,9 @@
 package com.example;
 
-public class Circle implements Shape {
+public class Circle extends ShapeImpl {
     private Integer radius;
 
     public Circle(Integer radius) {
-
-        this.radius = radius;
     }
 
     public Integer getRadius() {
@@ -14,6 +12,6 @@ public class Circle implements Shape {
 
     @Override
     public Double getArea() {
-        return Math.PI * Math.pow(radius, 2);
+        return MathService.circleArea(radius);
     }
 }

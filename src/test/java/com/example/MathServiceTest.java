@@ -64,4 +64,11 @@ public class MathServiceTest {
     }
 
     @Test
+    public void testAreaCircle() {
+        Circle circle = new Circle(2);
+        assertEquals(
+                MathService.formatArea(circle.type)
+        )
+
+    }
 }
