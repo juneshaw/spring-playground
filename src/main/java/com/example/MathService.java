@@ -71,7 +71,31 @@ public class MathService {
         return stringBuilder.toString();
     }
 
-    public static String volume(int x, int y, int z) {
-        return("");
+    public static String formatFormula(
+            String formula,
+            String dimensions,
+            String shape,
+            String result) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder
+                .append("The ")
+                .append(formula)
+                .append(" of a ")
+                .append(dimensions)
+                .append(" ")
+                .append(shape)
+                .append(" is ")
+                .append(result);
+        return stringBuilder.toString();
+//                The volume of a 3x4x5 rectangle is 60
+    }
+
+    public static int volume(int x, int y, int z) {
+
+        ArrayList<Integer> dimensions = new ArrayList<Integer>(
+                Arrays.asList(x,y,z));
+        int volume = 1;
+        for (Integer dimension : dimensions) volume *= dimension;
+        return volume;
     }
 }

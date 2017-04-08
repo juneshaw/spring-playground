@@ -62,19 +62,23 @@ public class MathController {
         }
     }
 
-    @RequestMapping("/volume")
+    @RequestMapping("/volume/{x}/{y}/{z}")
     public String getVolume(
-            @RequestParam String x,
-            @RequestParam String y,
-            @RequestParam String z) throws Exception
+            @PathVariable String x,
+            @PathVariable String y,
+            @PathVariable String z) throws Exception
     {
-        return MathService.volume(
+        Integer volume = MathService.volume(
                 Integer.parseInt(x),
                 Integer.parseInt(y),
                 Integer.parseInt(z)
         );
-
+        String dimensions =
+                x + "x" + y + "x" + z;
+        return MathService.formatFormula(
+                "volume",
+                dimensions,
+                "rectangle",
+                volume.toString());
     }
-
-
 }
