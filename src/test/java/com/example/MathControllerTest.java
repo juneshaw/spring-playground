@@ -1,13 +1,17 @@
 package com.example;
 
+import javafx.scene.shape.Circle;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.awt.*;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -16,6 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(MathController.class)
 public class MathControllerTest {
 
+    Object areaRequest =
+            {String type};
     @Autowired
     MockMvc mockMvc;
 
@@ -85,10 +91,44 @@ public class MathControllerTest {
     }
 
     @Test
-    public void testVolume() throws Exception {
+    public void testVolumeWithPost() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.post("/math/volume/3/4/5");
         this.mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string("The volume of a 3x4x5 rectangle is 60"));
+    }
+
+    @Test
+    public void testVolumeWithGet() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/volume/3/4/5");
+        this.mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("The volume of a 3x4x5 rectangle is 60"));
+    }
+
+    @Test
+    public void testVolumeWithPut() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.put("/math/volume/3/4/5");
+        this.mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("The volume of a 3x4x5 rectangle is 60"));
+    }
+
+    @Test
+    public void testVolumeWithPatch() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.patch("/math/volume/3/4/5");
+        this.mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("The volume of a 3x4x5 rectangle is 60"));
+    }
+
+    @Test
+    public void testAreaCircle() throws Exception {
+//        Object rectangleArea
+        Circle
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post("/math/area")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("")
     }
 }

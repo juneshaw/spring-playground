@@ -50,6 +50,7 @@ public class MathServiceTest {
         assertEquals(Integer.valueOf(0),
                 MathService.calculate("divide", 10, 0));
     }
+
     @Test
     public void testFormatExpression() {
         List<String> operands = Arrays.asList("2", "3", "4", "5");
@@ -61,4 +62,6 @@ public class MathServiceTest {
                         "14"));
 
     }
+
+    @Test
 }
