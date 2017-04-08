@@ -62,4 +62,19 @@ public class MathController {
         }
     }
 
+    @RequestMapping("/volume")
+    public String getVolume(
+            @RequestParam String x,
+            @RequestParam String y,
+            @RequestParam String z) throws Exception
+    {
+        return MathService.volume(
+                Integer.parseInt(x),
+                Integer.parseInt(y),
+                Integer.parseInt(z)
+        );
+
+    }
+
+
 }

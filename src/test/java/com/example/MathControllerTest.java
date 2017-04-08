@@ -84,13 +84,11 @@ public class MathControllerTest {
                 .andExpect(content().string("4 + 5 + 6 = 15"));
     }
 
-//    @Test
-//    public void testVolume() throws Exception {
-//        RequestBuilder request =
-//                MockMvcRequestBuilders.post(
-//                "/math/volume/3/4/5");
-//        this.mockMvc.perform(request)
-//                .andExpect(status().isOk())
-//                .andExpect(content().string("60"));
-//    }
+    @Test
+    public void testVolume() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.post("/math/volume/3/4/5");
+        this.mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("The volume of a 3x4x5 rectangle is 60"));
+    }
 }

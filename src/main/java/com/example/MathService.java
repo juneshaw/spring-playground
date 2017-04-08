@@ -70,4 +70,8 @@ public class MathService {
         stringBuilder.append(" = " + result);
         return stringBuilder.toString();
     }
+
+    public static String volume(int x, int y, int z) {
+        return("");
+    }
 }
