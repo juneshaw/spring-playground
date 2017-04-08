@@ -2,7 +2,11 @@ package com.example;
 
 public abstract class ShapeImpl implements Shape {
 
-    private ShapeType shapeType;
+    protected ShapeType shapeType;
+
+    public ShapeImpl(ShapeType shapeType) {
+        this.shapeType = shapeType;
+    }
 
     @Override
     public Double getArea() {

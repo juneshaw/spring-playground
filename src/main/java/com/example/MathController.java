@@ -81,4 +81,11 @@ public class MathController {
                 "rectangle",
                 volume.toString());
     }
+
+    @PostMapping("/area")
+    public String getArea(
+            @RequestParam MultiValueMap<String, String> params) {
+        return MathService;
+    }
+
 }

@@ -1,7 +1,6 @@
 package com.example;
 
-import com.jayway.jsonpath.spi.json.GsonJsonProvider;
-import javafx.scene.shape.Circle;
+import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.awt.*;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -21,8 +18,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(MathController.class)
 public class MathControllerTest {
 
-    Object areaRequest =
-            {String type};
     @Autowired
     MockMvc mockMvc;
 
@@ -125,12 +120,15 @@ public class MathControllerTest {
 
     @Test
     public void testAreaCircle() throws Exception {
-        Circle circle = new Circle(5);
-        GsonJsonProvider gson = new GsonJsonProvider();
-        String json = gson.toJson(Circle.class);
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
+        Circle circle = new Circle(4);
+        Gson gson = new Gson();
+        String json = gson.toJson(circle);
+        RequestBuilder request = MockMvcRequestBuilders
                 .post("/math/area")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json);
+        this.mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Area of a circle with a radius of 4 is 50.26548"));
     }
 }
