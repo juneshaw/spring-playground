@@ -87,7 +87,6 @@ public class MathService {
                 .append(" is ")
                 .append(result);
         return stringBuilder.toString();
-//                The volume of a 3x4x5 rectangle is 60
     }
 
     public static int volume(int x, int y, int z) {
@@ -98,44 +97,4 @@ public class MathService {
         for (Integer dimension : dimensions) volume *= dimension;
         return volume;
     }
-
-//    public static double circleArea(Integer radius) {
-//        return Math.PI * Math.pow(radius, 2);
-//    }
-//
-//    public static String formatCircleFormula(
-//            String radius,
-//            Double result) {
-//        String resultStr;
-//        DecimalFormat df = new DecimalFormat("#.#####");
-//        resultStr = df.format(result);
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder
-//                .append("Area of a circle with a radius of ")
-//                .append(radius)
-//                .append(" is ")
-//                .append(resultStr);
-//        return stringBuilder.toString();
-//    }
-
-//    public static double rectangleArea(Integer x, Integer y) {
-//        return x * y;
-////        Area of a 4x7 rectangle is 28
-//    }
-
-//    public static String formatRectangleFormula(
-//            String x,
-//            String y,
-//            Double result) {
-//        String resultStr;
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder
-//                .append("Area of a ")
-//                .append(x)
-//                .append("x")
-//                .append(y)
-//                .append(" rectangle is ")
-//                .append(result);
-//        return stringBuilder.toString();
-//    }
 }

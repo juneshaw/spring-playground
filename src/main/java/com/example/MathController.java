@@ -102,8 +102,8 @@ public class MathController {
                 x = params.get("x");
                 y = params.get("y");
                 shape = new Rectangle(
-                        Double.parseDouble(x),
-                        Double.parseDouble(y));
+                        Integer.parseInt(x),
+                        Integer.parseInt(y));
                 break;
             default:
                 break;

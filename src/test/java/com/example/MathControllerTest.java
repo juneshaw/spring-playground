@@ -126,8 +126,6 @@ public class MathControllerTest {
         JsonObject jsonObject = (JsonObject) gson.toJsonTree(circle);
         jsonObject.addProperty("type", "circle");
         String jsonString = jsonObject.toString();
-        System.out.println("jsonString: " + jsonString
-        );
         RequestBuilder request = MockMvcRequestBuilders
                 .post("/math/area")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -138,9 +136,23 @@ public class MathControllerTest {
     }
 
     @Test
-    public void testAreaRectangle() throws Exception() {
+    public void testAreaRectangle() throws Exception {
         Rectangle rectangle = new Rectangle(4, 7);
         Gson gson = new Gson();
-        Json
+        JsonObject jsonObject = (JsonObject) gson.toJsonTree(rectangle);
+        jsonObject.addProperty("type", "rectangle");
+        String jsonString = jsonObject.toString();
+        System.out.println("jsonString: " + jsonString);
+        RequestBuilder request = MockMvcRequestBuilders
+                .post("/math/area")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonString);
+        try {
+            this.mockMvc.perform(request)
+                    .andExpect(status().isOk())
+                    .andExpect(content().string("Area of a 4x7 rectangle is 28"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
