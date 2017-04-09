@@ -3,7 +3,10 @@ package com.example;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -82,10 +85,22 @@ public class MathController {
                 volume.toString());
     }
 
-    @PostMapping("/area")
+    @PostMapping(value = "/area")
     public String getArea(
-            @RequestParam MultiValueMap<String, String> params) {
-        return MathService;
+        @RequestBody Map<String, String> params) {
+        String type = params.get("type");
+        String radius, x, y;
+        switch (type) {
+            case "circle" :
+                radius = params.get("radius");
+                MathService.circleArea(Integer.parseInt(radius));
+                break;
+            default:
+                System.out.println("Error");
+                break;
+        }
+        }
+
     }
 
 }

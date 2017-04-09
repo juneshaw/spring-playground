@@ -1,6 +1,7 @@
 package com.example;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,11 +123,15 @@ public class MathControllerTest {
     public void testAreaCircle() throws Exception {
         Circle circle = new Circle(4);
         Gson gson = new Gson();
-        String json = gson.toJson(circle);
+        JsonObject jsonObject = (JsonObject) gson.toJsonTree(circle);
+        jsonObject.addProperty("type", "circle");
+        String jsonString = jsonObject.toString();
+        System.out.println("jsonString: " + jsonString
+        );
         RequestBuilder request = MockMvcRequestBuilders
                 .post("/math/area")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(json);
+                .content(jsonString);
         this.mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string("Area of a circle with a radius of 4 is 50.26548"));
