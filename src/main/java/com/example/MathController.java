@@ -90,17 +90,29 @@ public class MathController {
         @RequestBody Map<String, String> params) {
         String type = params.get("type");
         String radius, x, y;
+        Double result;
+        String resultStr;
+        ShapeImpl shape = null;
         switch (type) {
             case "circle" :
                 radius = params.get("radius");
-                MathService.circleArea(Integer.parseInt(radius));
+                shape = new Circle(Integer.parseInt(radius));
+                break;
+            case "rectangle" :
+                x = params.get("x");
+                y = params.get("y");
+                shape = new Rectangle(
+                        Double.parseDouble(x),
+                        Double.parseDouble(y));
                 break;
             default:
-                System.out.println("Error");
                 break;
         }
+        if (shape != null) {
+            return shape.toString();
+        } else {
+            return("Error");
         }
-
     }
 
 }

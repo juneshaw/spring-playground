@@ -136,4 +136,11 @@ public class MathControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Area of a circle with a radius of 4 is 50.26548"));
     }
+
+    @Test
+    public void testAreaRectangle() throws Exception() {
+        Rectangle rectangle = new Rectangle(4, 7);
+        Gson gson = new Gson();
+        Json
+    }
 }

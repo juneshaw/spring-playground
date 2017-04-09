@@ -1,25 +1,36 @@
 package com.example;
 
 public class Rectangle extends ShapeImpl {
-    private Integer x;
-    private Integer y;
+    private Double x;
+    private Double y;
 
-    public Rectangle(Integer x, Integer y) {
+    public Rectangle(Double x, Double y) {
         this.x = x;
         this.y = y;
     }
 
-    public Integer getX() {
+    public Double getX() {
         return x;
     }
 
-    public Integer getY() {
+    public Double getY() {
         return y;
     }
 
     @Override
-    public Double getArea() {
-        return null;
-//        return MathService.rectangleArea(x, y);
+    public Double area() {
+        return x * y;
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append("Area of a ")
+                .append(x)
+                .append("x")
+                .append(y)
+                .append(" rectangle is ")
+                .append(area())
+                .toString();
     }
 }

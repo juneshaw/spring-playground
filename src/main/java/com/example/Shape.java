@@ -1,5 +1,6 @@
 package com.example;
 
 public interface Shape {
-    Double getArea();
+    Double area();
+    String toString();
 }
