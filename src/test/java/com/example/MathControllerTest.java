@@ -1,7 +1,5 @@
 package com.example;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,14 +120,11 @@ public class MathControllerTest {
     @Test
     public void testAreaCircle() throws Exception {
         Circle circle = new Circle(4);
-        Gson gson = new Gson();
-        JsonObject jsonObject = (JsonObject) gson.toJsonTree(circle);
-        jsonObject.addProperty("type", "circle");
-        String jsonString = jsonObject.toString();
         RequestBuilder request = MockMvcRequestBuilders
                 .post("/math/area")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonString);
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                .param("type", "circle")
+                .param("radius", circle.getRadius().toString());
         this.mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string("Area of a circle with a radius of 4 is 50.26548"));
@@ -138,14 +133,12 @@ public class MathControllerTest {
     @Test
     public void testAreaRectangle() throws Exception {
         Rectangle rectangle = new Rectangle(4, 7);
-        Gson gson = new Gson();
-        JsonObject jsonObject = (JsonObject) gson.toJsonTree(rectangle);
-        jsonObject.addProperty("type", "rectangle");
-        String jsonString = jsonObject.toString();
         RequestBuilder request = MockMvcRequestBuilders
                 .post("/math/area")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonString);
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                .param("type", "rectangle")
+                .param("width", rectangle.getWidth().toString())
+                .param("height", rectangle.getHeight().toString());
         this.mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string("Area of a 4x7 rectangle is 28"));
@@ -154,16 +147,13 @@ public class MathControllerTest {
     @Test
     public void testAreaInvalid() throws Exception {
         Circle circle = new Circle(5);
-        Gson gson = new Gson();
-        JsonObject jsonObject = (JsonObject) gson.toJsonTree(circle);
-        jsonObject.addProperty("type", "rectangle");
-        String jsonString = jsonObject.toString();
         RequestBuilder request = MockMvcRequestBuilders
                 .post("/math/area")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonString);
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                .param("type", "rectangle")
+                .param("radius", "5");
         this.mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("Area of a 4x7 rectangle is 28"));
+                .andExpect(content().string("Invalid"));
     }
 }

@@ -1,5 +1,6 @@
 package com.example;
 
+import org.springframework.http.MediaType;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -85,12 +86,13 @@ public class MathController {
                 volume.toString());
     }
 
-    @PostMapping(value = "/area")
+    @PostMapping(value = "/area", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String getArea(
-        @RequestBody Map<String, String> params) {
+        @RequestParam
+                Map<String, String> params) {
         String type = params.get("type");
         String radius, width, height;
-        ShapeImpl shape;
+        ShapeImpl shape = null;
         String error = null;
         switch (type) {
             case "circle" :
@@ -113,6 +115,7 @@ public class MathController {
                 }
                 break;
             default:
+                error = "Invalid";
                 break;
         }
         if (error != null) {
