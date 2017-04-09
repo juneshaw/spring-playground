@@ -89,29 +89,36 @@ public class MathController {
     public String getArea(
         @RequestBody Map<String, String> params) {
         String type = params.get("type");
-        String radius, x, y;
-        Double result;
-        String resultStr;
-        ShapeImpl shape = null;
+        String radius, width, height;
+        ShapeImpl shape;
+        String error = null;
         switch (type) {
             case "circle" :
                 radius = params.get("radius");
-                shape = new Circle(Integer.parseInt(radius));
+                try {
+                    shape = new Circle(Integer.parseInt(radius));
+                } catch (NumberFormatException e) {
+                    error = "Invalid";
+                }
                 break;
             case "rectangle" :
-                x = params.get("x");
-                y = params.get("y");
-                shape = new Rectangle(
-                        Integer.parseInt(x),
-                        Integer.parseInt(y));
+                width = params.get("width");
+                height = params.get("height");
+                try {
+                    shape = new Rectangle(
+                            Integer.parseInt(width),
+                            Integer.parseInt(height));
+                } catch (NumberFormatException e) {
+                    error = "Invalid";
+                }
                 break;
             default:
                 break;
         }
-        if (shape != null) {
-            return shape.toString();
+        if (error != null) {
+            return error;
         } else {
-            return("Error");
+            return shape.toString();
         }
     }
 

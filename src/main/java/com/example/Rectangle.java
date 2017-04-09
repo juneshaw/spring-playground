@@ -1,34 +1,34 @@
 package com.example;
 
 public class Rectangle extends ShapeImpl {
-    private Integer x;
-    private Integer y;
+    private final Integer width;
+    private final Integer height;
 
-    public Rectangle(Integer x, Integer y) {
-        this.x = x;
-        this.y = y;
+    public Rectangle(Integer width, Integer height) {
+        this.width = width;
+        this.height = height;
     }
 
-    public Integer getX() {
-        return x;
+    public Integer getWidth() {
+        return width;
     }
 
-    public Integer getY() {
-        return y;
+    public Integer getHeight() {
+        return height;
     }
 
     @Override
     public Double area() {
-        return (double)(x * y);
+        return (double)(width * height);
     }
 
     @Override
     public String toString() {
         return new StringBuilder()
                 .append("Area of a ")
-                .append(x)
+                .append(width)
                 .append("x")
-                .append(y)
+                .append(height)
                 .append(" rectangle is ")
                 .append(area().intValue())
                 .toString();
