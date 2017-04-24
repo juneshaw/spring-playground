@@ -42,4 +42,9 @@ public class MovieController {
         return this.repository.count();
     }
 
+    @GetMapping("/find/{title}")
+    public Movie findByTitle(@PathVariable String title) {
+        return this.repository.findByTitle(title);
+    }
+
 }
