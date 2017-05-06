@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class TestWordCounterControllerWithConstructor {
 
-    TestCaseTwo testCase;
+    TestCase testCase;
 
     @Autowired
     MockMvc mvc;
@@ -33,7 +33,7 @@ public class TestWordCounterControllerWithConstructor {
 
     @Test
     public void testWordCounterController() throws Exception {
-        testCase = new TestCaseTwo().create();
+        testCase = new TestCase().create();
         String testString = testCase.getTestString();
         Map<String, Integer> testWordCount = testCase.getTestWordCount();
         Gson gson = new GsonBuilder().create();

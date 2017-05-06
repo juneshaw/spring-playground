@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TestWordCounterControllerWithAutowired {
 
     @Autowired
-    TestCaseTwo testCase;
+    TestCase testCase;
 
     @Autowired
     MockMvc mvc;

@@ -19,7 +19,7 @@ public class TestWordCounterUnit {
     WordCounter wordCounter;
 
     @Autowired
-    TestCaseTwo testCase;
+    TestCase testCase;
 
     @Test
     public void testWordCounterUnit() throws Exception{

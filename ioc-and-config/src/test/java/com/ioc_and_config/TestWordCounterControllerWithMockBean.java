@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(WordCountController.class)
 public class TestWordCounterControllerWithMockBean {
 
-    TestCaseTwo testCase;
+    TestCase testCase;
 
     @Autowired
     MockMvc mvc;
@@ -34,7 +34,7 @@ public class TestWordCounterControllerWithMockBean {
 
     @Before
     public void initialize() {
-        testCase = new TestCaseTwo().create();
+        testCase = new TestCase().create();
         String testString = testCase.getTestString();
         Map<String, Integer> testWordCount = testCase.getTestWordCount();
         Mockito.when(wordCounter.count(testString)).thenReturn(testWordCount);

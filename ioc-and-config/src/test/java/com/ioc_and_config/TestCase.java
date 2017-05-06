@@ -31,12 +31,10 @@ public class TestCase {
     public TestCase create() {
         this.setTestString("A brown cow jumps over a brown fox");
         this.setTestWordCount(new HashMap<>());
-        this.testWordCount.put("A", 1);
         this.testWordCount.put("brown", 2);
         this.testWordCount.put("cow", 1);
         this.testWordCount.put("jumps", 1);
         this.testWordCount.put("over", 1);
-        this.testWordCount.put("a", 1);
         this.testWordCount.put("fox", 1);
         return this;
     }
