@@ -21,12 +21,16 @@ public class WordCounter {
         Integer wordCount;
         Map<String, Integer> wordCountMap = new HashMap<String, Integer>();
         List<String> words =
-                Arrays.asList(wordList.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+"));
+                myConfig.isCaseSensitive() ?
+                Arrays.asList(wordList.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+"))
+                        :
+                Arrays.asList(wordList.replaceAll("[^a-zA-Z ]", "").split("\\s+"));
+
 
         List<String> lowerCaseAcceptableWords =
                 words
                 .stream()
-                .filter(word -> myConfig.getWords().getSkip().indexOf(word) < 0)
+                .filter(word -> myConfig.getWords().getSkip().indexOf(word.toLowerCase()) < 0)
                 .collect(Collectors.toList());
 
         for (String word : lowerCaseAcceptableWords) {
