@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties("movies")
 public class Config {
 
-    private static String url;
+    private String url;
 
     public String getUrl() {
         return url;

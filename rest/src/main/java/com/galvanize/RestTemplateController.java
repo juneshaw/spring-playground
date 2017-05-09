@@ -10,17 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/movies")
 public class RestTemplateController {
 
+
     @Autowired
     HttpService httpService;
 
-    @Autowired
-    Config config;
 
     @GetMapping
     public Movie getMovie(@RequestParam String query) throws Exception {
-        return httpService.get(
-                config.getUrl(),
-                query);
-
+        return httpService.get(query);
     }
 }

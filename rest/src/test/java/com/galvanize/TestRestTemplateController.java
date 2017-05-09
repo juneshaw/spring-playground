@@ -47,7 +47,7 @@ public class TestRestTemplateController {
         String query = "test";
 
         Mockito
-                .when(httpService.get("http://www.omdbapi.com", "help"))
+                .when(httpService.get("help"))
                 .thenReturn(mockedMovie);
     }
 

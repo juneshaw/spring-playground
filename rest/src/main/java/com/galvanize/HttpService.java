@@ -15,13 +15,19 @@ public class HttpService {
 //    @Autowired
 //    Config config;
 
+    private final Config config;
+
+    public HttpService(Config config) {
+        this.config = config;
+    }
+
 //    @Autowired
 //    RestTemplate restTemplate;
     private static final RestTemplate restTemplate = new RestTemplate();
 
-    public static Movie get(String url, String query) throws Exception {
+    public Movie get(String query) throws Exception {
         URI uri = UriComponentsBuilder
-                .fromUriString(url)
+                .fromUriString(config.getUrl())
                 .buildAndExpand(query)
                 .toUri();
         RequestEntity request = new RequestEntity(HttpMethod.GET, uri);
