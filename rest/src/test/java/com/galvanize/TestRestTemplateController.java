@@ -1,5 +1,7 @@
 package com.galvanize;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -39,16 +43,18 @@ public class TestRestTemplateController {
 
     @Before
     public void initialize() throws Exception {
+        Gson gson = new GsonBuilder().create();
         mockedMovie = new Movie(
                 "mockedTitle",
                 "mockedImdbId",
                 "mockedPoster",
                 "mockedYear");
         String query = "test";
+        String json = gson.toJson(mockedMovie);
 
         Mockito
                 .when(httpService.get("help"))
-                .thenReturn(mockedMovie);
+                .thenReturn(Arrays.asList(mockedMovie));
     }
 
     @Test
@@ -58,9 +64,9 @@ public class TestRestTemplateController {
 
         mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$0.title", is(mockedMovie.getTitle())))
-                .andExpect(jsonPath("$0.imdbId", is(mockedMovie.getImdbId())))
-                .andExpect(jsonPath("$0.poster", is(mockedMovie.getPoster())))
-                .andExpect(jsonPath("$0.year", is(mockedMovie.getYear())));
+                .andExpect(jsonPath("$[0].title", is(mockedMovie.getTitle())))
+                .andExpect(jsonPath("$[0].imdbId", is(mockedMovie.getImdbId())))
+                .andExpect(jsonPath("$[0].poster", is(mockedMovie.getPoster())))
+                .andExpect(jsonPath("$[0].year", is(mockedMovie.getYear())));
     }
 }

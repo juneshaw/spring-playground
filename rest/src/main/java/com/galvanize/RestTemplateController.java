@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/movies")
 public class RestTemplateController {
@@ -16,7 +18,7 @@ public class RestTemplateController {
 
 
     @GetMapping
-    public Movie getMovie(@RequestParam String query) throws Exception {
-        return httpService.get(query);
+    public List<Movie> getMovie(@RequestParam String q) throws Exception {
+        return httpService.get(q);
     }
 }
