@@ -9,7 +9,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -23,15 +23,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(RestTemplateController.class)
-@ContextConfiguration
-//@SpringBootTest
-//@TestPropertySource(properties = {
-//        "config.movies.url=url"
-//})
+@TestPropertySource(properties = {
+        "config.movies.url=url"
+})
 public class TestRestTemplateController {
-//
-//    @Autowired
-//    Config config;
 
     @Autowired
     private MockMvc mockMvc;

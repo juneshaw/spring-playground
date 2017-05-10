@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class HttpService {
@@ -23,17 +23,16 @@ public class HttpService {
     private static final RestTemplate restTemplate = new RestTemplate();
 
     public List<Movie> get(String query) throws Exception {
-        URI uri = UriComponentsBuilder
+        UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString(config.getUrl())
-                .buildAndExpand(query)
-                .toUri();
-        RequestEntity request = new RequestEntity(HttpMethod.GET, uri);
-        ParameterizedTypeReference<List<Movie>> typeRef = new ParameterizedTypeReference<List<Movie>>() {
-        };
-        ResponseEntity<List<Movie>> response =
+                .queryParam("s", query);
+        RequestEntity request = new RequestEntity(HttpMethod.GET, builder.build().toUri());
+        ParameterizedTypeReference<Map<String, List<Movie>>> typeRef =
+                new ParameterizedTypeReference<Map<String, List<Movie>>>() {};
+        ResponseEntity<Map<String, List<Movie>>> response =
                 restTemplate.exchange(
                         request,
                         typeRef);
-        return response.getBody();
+        return response.getBody().get("Search");
     }
 }
