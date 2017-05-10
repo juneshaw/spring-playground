@@ -1,6 +1,5 @@
 package com.galvanize;
 
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class HttpService {
@@ -27,12 +25,10 @@ public class HttpService {
                 .fromUriString(config.getUrl())
                 .queryParam("s", query);
         RequestEntity request = new RequestEntity(HttpMethod.GET, builder.build().toUri());
-        ParameterizedTypeReference<Map<String, List<Movie>>> typeRef =
-                new ParameterizedTypeReference<Map<String, List<Movie>>>() {};
-        ResponseEntity<Map<String, List<Movie>>> response =
+        ResponseEntity<ResponseWrapperMovie> response =
                 restTemplate.exchange(
                         request,
-                        typeRef);
-        return response.getBody().get("Search");
+                        ResponseWrapperMovie.class);
+        return response.getBody().getMovies();
     }
 }

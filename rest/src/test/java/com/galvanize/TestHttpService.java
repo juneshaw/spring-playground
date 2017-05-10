@@ -31,9 +31,6 @@ public class TestHttpService {
 
     @Test
     public void testHttpServiceGet() throws Exception {
-//        Mockito.when(config.getUrl())
-//                .thenReturn("someurl");
-
         List<Movie> movies = httpService.get("harry");
 
 //
