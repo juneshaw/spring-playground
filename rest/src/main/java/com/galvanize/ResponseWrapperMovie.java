@@ -1,25 +1,19 @@
 package com.galvanize;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class ResponseWrapperMovie {
 
-    private String wrapper;
-    private ArrayList<Movie> movies = new ArrayList<Movie>();
+    @JsonProperty("Search")
+    private List<Movie> search;
 
-    public String getWrapper() {
-        return wrapper;
+    public List<Movie> getSearch() {
+        return this.search;
     }
 
-    public void setWrapper(String wrapper) {
-        this.wrapper = wrapper;
-    }
-
-    public ArrayList<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(ArrayList<Movie> movies) {
-        this.movies = movies;
+    public void setSearch(List movies) {
+        this.search = movies;
     }
 }

@@ -29,6 +29,6 @@ public class HttpService {
                 restTemplate.exchange(
                         request,
                         ResponseWrapperMovie.class);
-        return response.getBody().getMovies();
+        return response.getBody().getSearch();
     }
 }
