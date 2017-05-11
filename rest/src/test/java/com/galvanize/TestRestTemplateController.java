@@ -43,7 +43,8 @@ public class TestRestTemplateController {
                 "mockedTitle",
                 "mockedImdbId",
                 "mockedPoster",
-                "mockedYear");
+                "mockedYear",
+                "mockedType");
         String query = "test";
         String json = gson.toJson(mockedMovie);
 
@@ -62,6 +63,7 @@ public class TestRestTemplateController {
                 .andExpect(jsonPath("$[0].title", is(mockedMovie.getTitle())))
                 .andExpect(jsonPath("$[0].imdbId", is(mockedMovie.getImdbId())))
                 .andExpect(jsonPath("$[0].poster", is(mockedMovie.getPoster())))
-                .andExpect(jsonPath("$[0].year", is(mockedMovie.getYear())));
+                .andExpect(jsonPath("$[0].year", is(mockedMovie.getYear())))
+                .andExpect(jsonPath("$[0].type", is(mockedMovie.getType())));
     }
 }

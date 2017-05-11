@@ -18,7 +18,7 @@ public class HttpService {
         this.config = config;
     }
 
-    private static final RestTemplate restTemplate = new RestTemplate();
+    RestTemplate restTemplate;
 
     public List<Movie> get(String query) throws Exception {
         UriComponentsBuilder builder = UriComponentsBuilder

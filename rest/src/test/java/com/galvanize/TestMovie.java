@@ -14,32 +14,37 @@ public class TestMovie {
     @Test
     public void getMovieGets() throws Exception {
         Movie movie = new Movie(
-                "myTitle",
+                "MyTitle",
                 "MyImdbId",
                 "MyPoster",
-                "MyYear");
-        assertThat(movie.getTitle() == "myTitle");
-        assertThat(movie.getImdbId() == "myImdbId");
-        assertThat(movie.getPoster() == "myPoster");
-        assertThat(movie.getYear() == "myYear");
+                "MyYear",
+                "MyType");
+        assertThat(movie.getTitle() == "MyTitle");
+        assertThat(movie.getImdbId() == "MyImdbId");
+        assertThat(movie.getPoster() == "MyPoster");
+        assertThat(movie.getYear() == "MyYear");
+        assertThat(movie.getYear() == "MyType");
 
         movie.setTitle("newTitle");
         movie.setImdbId("newId");
         movie.setPoster("newPoster");
         movie.setYear("newYear");
+        movie.setYear("newType");
     }
 
     @Test
     public void getMovieSets() throws Exception {
         Movie movie = new Movie(
-                "myTitle",
+                "MyTitle",
                 "MyImdbId",
                 "MyPoster",
-                "MyYear");
+                "MyYear",
+                "MyType");
 
         assertThat(movie.getTitle() == " newTitle");
         assertThat(movie.getImdbId() == "newImdbId");
         assertThat(movie.getPoster() == "newPoster");
         assertThat(movie.getYear() == "newYear");
+        assertThat(movie.getYear() == "newType");
     }
 }
