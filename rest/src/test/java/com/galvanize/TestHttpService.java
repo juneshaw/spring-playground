@@ -42,11 +42,12 @@ public class TestHttpService {
                 mockRestTemplate);
         Movie movie = new Movie("MyTitle", "MyYear", "MyImdbId", "MyType", "MyPoster");
         ResponseWrapperMovie responseWrapperMovie = new ResponseWrapperMovie(Arrays.asList(movie), 99, "MyResponse");
+
         MockRestServiceServer mockServer = MockRestServiceServer.createServer(mockRestTemplate);
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(responseWrapperMovie);
         mockServer.expect(
-                requestTo("http://www.omdbapi.com?s=harry"))
+                requestTo(config.getUrl() + "?s=harry"))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(json, MediaType.APPLICATION_JSON));
 
