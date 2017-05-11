@@ -1,8 +1,6 @@
 package com.galvanize;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.junit.Before;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -34,11 +32,6 @@ public class TestHttpService {
 
     Config config;
 
-    @Before
-    public void initialize() throws Exception {
-
-    }
-
     @Test
     public void testHttpServiceGet() throws Exception {
         config = new Config();
@@ -50,10 +43,10 @@ public class TestHttpService {
                 "restTemplate",
                 mockRestTemplate);
         Movie movie = new Movie("MyTitle", "MyYear", "MyImdbId", "MyType", "MyPoster");
-        ResponseWrapperMovie responseMovieWrapper = new ResponseWrapperMovie(Arrays.asList(movie), 99, "MyResponse");
+        ResponseWrapperMovie responseWrapperMovie = new ResponseWrapperMovie(Arrays.asList(movie), 99, "MyResponse");
         MockRestServiceServer mockServer = MockRestServiceServer.createServer(mockRestTemplate);
-        Gson gson = new GsonBuilder().create();
-        String json = gson.toJson(responseMovieWrapper);
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(responseWrapperMovie);
         mockServer.expect(
                 requestTo("http://www.omdbapi.com?s=harry"))
                 .andExpect(method(HttpMethod.GET))
