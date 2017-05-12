@@ -1,53 +1,52 @@
 package com.galvanize;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @RunWith(MockitoJUnitRunner.class)
+@TestPropertySource(properties={"movies.url=http://www.omdbapi.com"})
 public class TestHttpService {
 
-    @Mock
-    RestTemplate mockRestTemplate;
+    private HttpService httpService;
+    private MockRestServiceServer mockServer;
+    private Config config;
+    private String url = "http://omdbapi.com/";
 
-    HttpService httpService;
+    @Before
+    public void initialize() {
+        config = mock(Config.class);
+        when (config.getUrl()).thenReturn(url);
 
-    Config config;
+        httpService = new HttpService(config);
+        this.mockServer = MockRestServiceServer.createServer(httpService.getRestTemplate());
+    }
 
     @Test
     public void testHttpServiceGet() throws Exception {
-        config = new Config();
-        config.setUrl("http://www.omdbapi.com");
-        httpService = new HttpService(config);
-        mockRestTemplate = new RestTemplate();
-        ReflectionTestUtils.setField(
-                httpService,
-                "restTemplate",
-                mockRestTemplate);
         Movie movie = new Movie("MyTitle", "MyYear", "MyImdbId", "MyType", "MyPoster");
         ResponseWrapperMovie responseWrapperMovie = new ResponseWrapperMovie(Arrays.asList(movie), 99, "MyResponse");
-
-        MockRestServiceServer mockServer = MockRestServiceServer.createServer(mockRestTemplate);
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(responseWrapperMovie);
         mockServer.expect(
-                requestTo(config.getUrl() + "?s=harry"))
+                requestTo(url + "?s=harry"))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(json, MediaType.APPLICATION_JSON));
 

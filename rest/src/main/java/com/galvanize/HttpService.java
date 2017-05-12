@@ -13,12 +13,15 @@ import java.util.List;
 public class HttpService {
 
     private final Config config;
+    private final RestTemplate restTemplate = new RestTemplate();
 
     public HttpService(Config config) {
         this.config = config;
     }
 
-    RestTemplate restTemplate = new RestTemplate();
+    public RestTemplate getRestTemplate() {
+        return this.restTemplate;
+    }
 
     public List<Movie> get(String query) throws Exception {
         UriComponentsBuilder builder = UriComponentsBuilder
