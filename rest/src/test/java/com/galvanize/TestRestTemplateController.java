@@ -9,7 +9,6 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -23,9 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(RestTemplateController.class)
-@TestPropertySource(properties = {
-        "config.movies.url=url"
-})
 public class TestRestTemplateController {
 
     @Autowired
@@ -60,10 +56,10 @@ public class TestRestTemplateController {
 
         mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].title", is(mockedMovie.getTitle())))
-                .andExpect(jsonPath("$[0].imdbId", is(mockedMovie.getImdbId())))
-                .andExpect(jsonPath("$[0].poster", is(mockedMovie.getPoster())))
-                .andExpect(jsonPath("$[0].year", is(mockedMovie.getYear())))
-                .andExpect(jsonPath("$[0].type", is(mockedMovie.getType())));
+                .andExpect(jsonPath("$[0].Title", is(mockedMovie.getTitle())))
+                .andExpect(jsonPath("$[0].imdbID", is(mockedMovie.getImdbId())))
+                .andExpect(jsonPath("$[0].Poster", is(mockedMovie.getPoster())))
+                .andExpect(jsonPath("$[0].Year", is(mockedMovie.getYear())))
+                .andExpect(jsonPath("$[0].Type", is(mockedMovie.getType())));
     }
 }

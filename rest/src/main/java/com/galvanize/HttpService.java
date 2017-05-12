@@ -1,12 +1,11 @@
 package com.galvanize;
 
-import org.springframework.http.HttpMethod;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -27,7 +26,9 @@ public class HttpService {
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString(config.getUrl())
                 .queryParam("s", query);
-        RequestEntity request = new RequestEntity(HttpMethod.GET, builder.build().toUri());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        RequestEntity request = new RequestEntity(headers, HttpMethod.GET, builder.build().toUri());
         ResponseEntity<ResponseWrapperMovie> response =
                 restTemplate.exchange(
                         request,
